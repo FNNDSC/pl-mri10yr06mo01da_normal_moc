@@ -119,7 +119,7 @@ class MRI10yr06mo01da_normal_moc(ChrisApp):
     TYPE                    = 'fs'
     DESCRIPTION             = 'This application simply copies from embedded data a reference normal anonymized MRI of a subject aged 10 years, 06 months, 01 days.'
     DOCUMENTATION           = 'http://wiki'
-    VERSION                 = '1.1.0'
+    VERSION                 = '1.1.6'
     ICON                    = '' # url of an icon image
     LICENSE                 = 'Opensource (MIT)'
     MAX_NUMBER_OF_WORKERS   = 1  # Override with integer value
@@ -148,33 +148,6 @@ class MRI10yr06mo01da_normal_moc(ChrisApp):
         """
         Define the CLI arguments accepted by this plugin app.
         """
-        self.add_argument("-v", "--verbosity",
-                            help        = "verbosity level for app",
-                            type        = str,
-                            dest        = 'verbosity',
-                            optional    = True,
-                            default     = "0")
-        self.add_argument('--man',
-                            help        = 'if specified, print man page',
-                            type        = bool,
-                            dest        = 'b_man',
-                            action      = 'store_true',
-                            optional    = True,
-                            default     = False)
-        self.add_argument('--meta',
-                            help        = 'if specified, print plugin meta data',
-                            type        = bool,
-                            dest        = 'b_meta',
-                            action      = 'store_true',
-                            optional    = True,
-                            default     = False)
-        self.add_argument('--version',
-                            help        = 'if specified, print version number',
-                            type        = bool,
-                            dest        = 'b_version',
-                            action      = 'store_true',
-                            optional    = True,
-                            default     = False)
         self.add_argument('--splash',
                             help        = 'a splash message to print',
                             type        = str,
@@ -188,38 +161,10 @@ class MRI10yr06mo01da_normal_moc(ChrisApp):
                           optional      = True,
                           help          = 'directory override')
 
-    def manPage_show(self):
-        """
-        Print some quick help.
-        """
-        print(Gstr_synopsis)
-
-    def metaData_show(self):
-        """
-        Print the plugin meta data
-        """
-        l_metaData  = dir(self)
-        l_classVar  = [x for x in l_metaData if x.isupper() ]
-        for str_var in l_classVar:
-            str_val = getattr(self, str_var)
-            print("%20s: %s" % (str_var, str_val))
-
     def run(self, options):
         """
         Define the code to be run by this plugin app.
         """
-        if options.b_man:
-            self.manPage_show()
-            sys.exit(0)
-
-        if options.b_meta:
-            self.metaData_show()
-            sys.exit(0)
-
-        if options.b_version:
-            print('Plugin Version: %s' % MRI10yr06mo01da_normal_moc.VERSION)
-            sys.exit(0)
-
         print(Gstr_title)
         print('Version: %s' % MRI10yr06mo01da_normal_moc.VERSION)
 
